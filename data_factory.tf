@@ -1,6 +1,6 @@
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/data_factory
 resource "azurerm_data_factory" "this" {
-  name                = var.data_factory_name
+  name                = local.resource_names.data_factory_name
   resource_group_name = data.azurerm_resource_group.this.name
   location            = data.azurerm_resource_group.this.location
 

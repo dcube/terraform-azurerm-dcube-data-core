@@ -1,6 +1,6 @@
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault
 resource "azurerm_key_vault" "key_vault_core" {
-  name                        = var.key_vault_name
+  name                        = local.resource_names.key_vault_name
   location                    = data.azurerm_resource_group.this.location
   resource_group_name         = data.azurerm_resource_group.this.name
   tenant_id                   = data.azurerm_client_config.current.tenant_id
@@ -35,7 +35,7 @@ resource "azurerm_key_vault_secret" "function_orchestrator_key" {
 resource "azurerm_key_vault_access_policy" "keyvault_policies_azure_devops" {
   key_vault_id = azurerm_key_vault.key_vault_core.id
   tenant_id    = data.azurerm_client_config.current.tenant_id
-  object_id    = var.current_object_id
+  object_id    = local.current_object_id
 
   secret_permissions = [
     "Get",

@@ -1,15 +1,15 @@
 variable "environment" {
-  type = string
+  type        = string
   description = "Environment trigram used for resource names. For example, dev, uat, tst, ppd, prd, ..."
 }
 
 variable "customer_code" {
-  type = string
+  type        = string
   description = "Customer code used for the resource names. 3 letters maximum is recommended"
 }
 
 variable "region_code" {
-  type = string
+  type        = string
   description = "Region code used for resource group names, for example weu for West Europe. 3 letters maximum is recommended"
 }
 
@@ -18,58 +18,69 @@ variable "region_code" {
 #####################
 
 variable "resource_group_name" {
-  type = string
-  default = "rg-data-core-${var.environment}-${var.region_code}-01"
+  type        = string
+  default     = ""
+  description = "Resource group where to create Data Core resources. Optional, default is 'rg-data-core-$${var.environment}-$${var.region_code}-01'"
 }
 
 variable "log_analytics_name" {
-  type = string
-  default = "log-${var.customer_code}-logs-${var.environment}-01"
+  type        = string
+  default     = ""
+  description = "Log analytics workspace name. Optional, default is 'log-$${var.customer_code}-logs-$${var.environment}-01'"
 }
 
 variable "log_analytics_name_rg" {
-  type = string
-  default = "rg-infra-logs-${var.environment}-${var.region_code}-01"
+  type        = string
+  default     = ""
+  description = "Resource of the Log analytics workspace. Optional, default is 'rg-infra-logs-$${var.environment}-$${var.region_code}-01'"
 }
 
 variable "storage_diagnostics_name" {
-  type = string
-  default = "st${var.customer_code}datacore${var.environment}02"
+  type        = string
+  default     = ""
+  description = "Name of the storage account used to store diagnostics. Optional, default is 'st$${var.customer_code}datacore$${var.environment}02'"
 }
 
 variable "application_insight_name" {
-  type = string
-  default = "appi-${var.customer_code}-data-core-${var.environment}-01"
+  type        = string
+  default     = ""
+  description = "Name of the application insight used by the function app. Optional, default is 'appi-$${var.customer_code}-data-core-$${var.environment}-01'"
 }
 
 variable "data_factory_name" {
-  type = string
-  default = "adf-${var.customer_code}-data-core-${var.environment}-01"
+  type        = string
+  default     = ""
+  description = "Name of the Data Factory. Optional, default is 'adf-$${var.customer_code}-data-core-$${var.environment}-01'"
 }
 
 variable "datalake_name" {
-  type = string
-  default = "st${var.customer_code}datacore${var.environment}01"
+  type        = string
+  default     = ""
+  description = "Name of the storage account used as data lake. Optional, default is 'st$${var.customer_code}datacore$${var.environment}01'"
 }
 
 variable "key_vault_name" {
-  type = string
-  default = "kv-${var.customer_code}-data-core-${var.environment}-01"
+  type        = string
+  default     = ""
+  description = "Name of the key vault. Optional, default is 'kv-$${var.customer_code}-data-core-$${var.environment}-01'"
 }
 
 variable "storage_function_app" {
-  type = string
-  default = "st${var.customer_code}datacore${var.environment}03"
+  type        = string
+  default     = ""
+  description = "Name of the storage account used by the function app. Optional, default is 'st$${var.customer_code}datacore$${var.environment}03'"
 }
 
 variable "service_plan_name" {
-  type = string
-  default = "asp-${var.customer_code}-data-core-${var.environment}-01"
+  type        = string
+  default     = ""
+  description = "Name of the plan used by the function app. Optional, default is 'asp-$${var.customer_code}-data-core-$${var.environment}-01'"
 }
 
 variable "orchestrate_function_name" {
-  type = string
-  default = "func-${var.customer_code}-data-core-${var.environment}-01"
+  type        = string
+  default     = ""
+  description = "Name of the function used as orchestrator. Optional, default is 'func-$${var.customer_code}-data-core-$${var.environment}-01'"
 }
 
 #####################
@@ -77,9 +88,9 @@ variable "orchestrate_function_name" {
 #####################
 
 variable "current_object_id" {
-  type = string
-  default = data.azurerm_client_config.current.object_id
-  description = "Current object id to assign roles"
+  type        = string
+  default     = ""
+  description = "Current object id to assign roles. Optional, default value is data.azurerm_client_config.current.object_id"
 }
 
 #####################
@@ -87,11 +98,11 @@ variable "current_object_id" {
 #####################
 
 variable "storage_redundancy" {
-  type = string
+  type        = string
   description = "Redundancy for the storage accounts. For example, LRS, GRS, ..."
 }
 
 variable "storage_monitoring_retention" {
-  type = number
+  type        = number
   description = "Number of days for the log retention in the storage account"
 }

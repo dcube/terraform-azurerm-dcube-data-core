@@ -1,7 +1,7 @@
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/storage_account
 # Create Storage Account for Datalake
 resource "azurerm_storage_account" "datalake" {
-  name                              = var.datalake_name
+  name                              = local.resource_names.datalake_name
   resource_group_name               = data.azurerm_resource_group.this.name
   location                          = data.azurerm_resource_group.this.location
   account_tier                      = "Standard"
@@ -32,7 +32,7 @@ resource "azurerm_storage_data_lake_gen2_filesystem" "datalake" {
 resource "azurerm_role_assignment" "datalake_iam_devops_owner" {
   scope                = azurerm_storage_account.datalake.id
   role_definition_name = "Storage Blob Data Owner"
-  principal_id         = var.current_object_id
+  principal_id         = local.current_object_id
 }
 
 resource "azurerm_role_assignment" "datalake_iam_snowflake_contributor" {

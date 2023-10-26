@@ -1,7 +1,7 @@
 # Create Storage Account for fonction app
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account
 resource "azurerm_storage_account" "function_app_orchestrate" {
-  name                              = var.storage_function_app
+  name                              = local.resource_names.function_app.storage_function_app
   resource_group_name               = data.azurerm_resource_group.this.name
   location                          = data.azurerm_resource_group.this.location
   account_tier                      = "Standard"
@@ -14,7 +14,7 @@ resource "azurerm_storage_account" "function_app_orchestrate" {
 }
 
 resource "azurerm_service_plan" "orchestrate" {
-  name                = var.service_plan_name
+  name                = local.resource_names.function_app.service_plan_name
   resource_group_name = data.azurerm_resource_group.this.name
   location            = data.azurerm_resource_group.this.location
   os_type             = "Linux"
@@ -25,7 +25,7 @@ resource "azurerm_service_plan" "orchestrate" {
 
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/linux_function_app
 resource "azurerm_linux_function_app" "orchestrate" {
-  name                          = var.orchestrate_function_name
+  name                          = local.resource_names.function_app.orchestrate_function_name
   resource_group_name           = data.azurerm_resource_group.this.name
   location                      = data.azurerm_resource_group.this.location
   storage_account_name          = azurerm_storage_account.function_app_orchestrate.name

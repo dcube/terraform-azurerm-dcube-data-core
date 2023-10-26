@@ -1,6 +1,6 @@
 # Create Storage Account for diagnostics
 resource "azurerm_storage_account" "storage_diagnostics" {
-  name                              = var.storage_diagnostics_name
+  name                              = local.resource_names.monitoring.storage_diagnostics_name
   resource_group_name               = data.azurerm_resource_group.this.name
   location                          = data.azurerm_resource_group.this.location
   account_tier                      = "Standard"
@@ -41,7 +41,7 @@ resource "azurerm_storage_container" "storage_container_diagnostics" {
 
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/application_insights
 resource "azurerm_application_insights" "this" {
-  name                = var.application_insight_name
+  name                = local.resource_names.monitoring.application_insight_name
   location            = data.azurerm_resource_group.this.location
   resource_group_name = data.azurerm_resource_group.this.name
   workspace_id        = data.azurerm_log_analytics_workspace.log.id
