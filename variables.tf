@@ -106,3 +106,12 @@ variable "storage_monitoring_retention" {
   type        = number
   description = "Number of days for the log retention in the storage account"
 }
+
+#####################
+# Snowflake
+#####################
+variable "snowflake_app_name" {
+  type        = string
+  default     = ""
+  description = "Name of the SPN used by snowflake to connect to the datalake"
+}

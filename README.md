@@ -1,7 +1,7 @@
 # data_core_terraform_module
 Terraform module for "Core" in the dcube data architecture
 
-# Prerequesite
+# Prerequesites
 
 ## resources
 
@@ -22,3 +22,19 @@ These providers must be registered before running Terraform:
 - Microsoft.App
 - Microsoft.Consumption
 - Microsoft.Storage
+
+# Usage
+
+```HCL
+module "dcube-data-core" {
+  source  = "dcube/dcube-data-core/azurerm"
+  version = "0.0.3"
+  
+  environment                  = "dev"
+  customer_code                = "abc"
+  region_code                  = "weu"
+  storage_redundancy           = "LRS"
+  storage_monitoring_retention = 30
+  snowflake_app_name           = "azertysnowflake"
+}
+```

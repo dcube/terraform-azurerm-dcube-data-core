@@ -36,6 +36,8 @@ resource "azurerm_role_assignment" "datalake_iam_devops_owner" {
 }
 
 resource "azurerm_role_assignment" "datalake_iam_snowflake_contributor" {
+  count = length(var.snowflake_app_name) > 0 ? 1 : 0
+
   scope                = azurerm_storage_account.datalake.id
   role_definition_name = "Storage Blob Data Contributor"
   principal_id         = data.azuread_service_principal.snowflake.object_id
