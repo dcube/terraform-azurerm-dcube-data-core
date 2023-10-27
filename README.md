@@ -1,5 +1,6 @@
 # dcube/dcube-data-core/azurerm
 Terraform module for "Data Core" in the dcube data architecture
+https://registry.terraform.io/modules/dcube/dcube-data-core/azurerm/latest
 
 # Prerequesites
 
@@ -34,8 +35,8 @@ These providers must be registered on the target subscription before running Ter
 ## Permissions
 
 To run this Terraform project you need these permissions (the SPN in the CI/CD):
-- SPN must be "Storage Account Key Operator Service Role" on terraform storage account
-- SPN must be owner of its resource group
+- SPN must be ***Storage Account Key Operator Service Role*** on terraform storage account
+- SPN must be ***Owner*** of its resource group
 
 # Usage
 
