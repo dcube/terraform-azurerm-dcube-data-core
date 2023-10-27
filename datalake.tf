@@ -40,7 +40,7 @@ resource "azurerm_role_assignment" "datalake_iam_snowflake_contributor" {
 
   scope                = azurerm_storage_account.datalake.id
   role_definition_name = "Storage Blob Data Contributor"
-  principal_id         = data.azuread_service_principal.snowflake.object_id
+  principal_id         = data.azuread_service_principal.snowflake[0].object_id
 }
 
 # #############################################################################
@@ -50,7 +50,7 @@ resource "azurerm_monitor_diagnostic_setting" "diagnostics_datalake" {
   name                       = "diag-${azurerm_storage_account.datalake.name}-01"
   target_resource_id         = azurerm_storage_account.datalake.id
   storage_account_id         = azurerm_storage_account.storage_diagnostics.id
-  log_analytics_workspace_id = data.azurerm_log_analytics_workspace.log.id
+  log_analytics_workspace_id = var.create_log_analytics_workspace ? azurerm_log_analytics_workspace.log[0].id : data.azurerm_log_analytics_workspace.log[0].id
 
   metric {
     category = "Transaction"

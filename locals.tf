@@ -4,7 +4,8 @@ locals {
     resource_group_name = length(var.resource_group_name) > 0 ? var.resource_group_name : "rg-data-core-${var.environment}-${var.region_code}-01"
     monitoring = {
       log_analytics_name       = length(var.log_analytics_name) > 0 ? var.log_analytics_name : "log-${var.customer_code}-logs-${var.environment}-01"
-      log_analytics_name_rg    = length(var.log_analytics_name_rg) > 0 ? var.log_analytics_name_rg : "rg-infra-logs-${var.environment}-${var.region_code}-01"
+      # if we create the log analytics workspace then default RG is local.resource_names.resource_group_name
+      log_analytics_name_rg    = length(var.log_analytics_name_rg) > 0 ? var.log_analytics_name_rg : (var.create_log_analytics_workspace ? (length(var.resource_group_name) > 0 ? var.resource_group_name : "rg-data-core-${var.environment}-${var.region_code}-01") : "rg-infra-logs-${var.environment}-${var.region_code}-01")
       storage_diagnostics_name = length(var.storage_diagnostics_name) > 0 ? var.storage_diagnostics_name : "st${var.customer_code}datacore${var.environment}02"
       application_insight_name = length(var.application_insight_name) > 0 ? var.application_insight_name : "appi-${var.customer_code}-data-core-${var.environment}-01"
     }

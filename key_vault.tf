@@ -79,11 +79,8 @@ resource "azurerm_monitor_diagnostic_setting" "diagnostic_key_vault" {
   name                       = "diag-${azurerm_key_vault.key_vault_core.name}-01"
   target_resource_id         = azurerm_key_vault.key_vault_core.id
   storage_account_id         = azurerm_storage_account.storage_diagnostics.id
-  log_analytics_workspace_id = data.azurerm_log_analytics_workspace.log.id
-
-  enabled_log {
-    category = "AuditEvent"
-  }
+  log_analytics_workspace_id = var.create_log_analytics_workspace ? azurerm_log_analytics_workspace.log[0].id : data.azurerm_log_analytics_workspace.log[0].id
+  log_analytics_destination_type = "AzureDiagnostics"
 
   metric {
     category = "AllMetrics"

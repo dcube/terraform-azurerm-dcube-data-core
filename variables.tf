@@ -32,7 +32,7 @@ variable "log_analytics_name" {
 variable "log_analytics_name_rg" {
   type        = string
   default     = ""
-  description = "Resource of the Log analytics workspace. Optional, default is 'rg-infra-logs-$${var.environment}-$${var.region_code}-01'"
+  description = "Resource of the Log analytics workspace. Optional, if create_log_analytics_workspace=true then default value is the same than resource_group_name else default is 'rg-infra-logs-$${var.environment}-$${var.region_code}-01'"
 }
 
 variable "storage_diagnostics_name" {
@@ -114,4 +114,19 @@ variable "snowflake_app_name" {
   type        = string
   default     = ""
   description = "Name of the SPN used by snowflake to connect to the datalake"
+}
+
+#####################
+# Monitoring
+#####################
+variable "create_log_analytics_workspace" {
+  type        = bool
+  default     = false
+  description = "True to create Log Analytics Workspace. False to use an existing one. Optional, default is false"
+}
+
+variable "log_analytics_retention" {
+  type        = number
+  default     = 90
+  description = "umber of days for the log retention in the Log Analytics Workspace if variable create_log_analytics_workspace is true"
 }

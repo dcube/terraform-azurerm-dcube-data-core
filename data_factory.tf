@@ -30,7 +30,7 @@ resource "azurerm_monitor_diagnostic_setting" "diagnostics_adf" {
   name                           = "diag-${azurerm_data_factory.this.name}-01"
   target_resource_id             = azurerm_data_factory.this.id
   storage_account_id             = azurerm_storage_account.storage_diagnostics.id
-  log_analytics_workspace_id     = data.azurerm_log_analytics_workspace.log.id
+  log_analytics_workspace_id     = var.create_log_analytics_workspace ? azurerm_log_analytics_workspace.log[0].id : data.azurerm_log_analytics_workspace.log[0].id
   log_analytics_destination_type = "AzureDiagnostics"
 
   enabled_log {

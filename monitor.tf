@@ -1,3 +1,16 @@
+# Create Log analytics workspace
+resource "azurerm_log_analytics_workspace" "log" {
+  count = var.create_log_analytics_workspace ? 1 : 0
+
+  name                = local.resource_names.monitoring.log_analytics_name
+  location            = data.azurerm_resource_group.this.location
+  resource_group_name = data.azurerm_resource_group.this.name
+  sku                 = "PerGB2018"
+  retention_in_days   = var.log_analytics_retention
+
+  tags = merge(data.azurerm_resource_group.this.tags, { Role = "Log analytics core" })
+}
+
 # Create Storage Account for diagnostics
 resource "azurerm_storage_account" "storage_diagnostics" {
   name                              = local.resource_names.monitoring.storage_diagnostics_name
@@ -44,7 +57,7 @@ resource "azurerm_application_insights" "this" {
   name                = local.resource_names.monitoring.application_insight_name
   location            = data.azurerm_resource_group.this.location
   resource_group_name = data.azurerm_resource_group.this.name
-  workspace_id        = data.azurerm_log_analytics_workspace.log.id
+  workspace_id        = var.create_log_analytics_workspace ? azurerm_log_analytics_workspace.log[0].id : data.azurerm_log_analytics_workspace.log[0].id
   application_type    = "other"
 
   tags = merge(data.azurerm_resource_group.this.tags, { Role = "Log management for the function app" })

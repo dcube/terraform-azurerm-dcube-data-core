@@ -6,8 +6,10 @@ data "azurerm_resource_group" "this" {
 }
 
 data "azurerm_log_analytics_workspace" "log" {
-  name                = local.resource_names.log_analytics_name
-  resource_group_name = local.resource_names.log_analytics_name_rg
+  count = var.create_log_analytics_workspace ? 0 : 1
+
+  name                = local.resource_names.monitoring.log_analytics_name
+  resource_group_name = local.resource_names.monitoring.log_analytics_name_rg
 }
 
 data "azuread_service_principal" "snowflake" {
