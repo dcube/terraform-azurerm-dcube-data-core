@@ -11,7 +11,7 @@ These resources must exist:
 - A Core resource group in which core resources will be created. Default value: ***rg-data-core-{var.environment}-{var.region_code}-01***
 - A SPN to run the CI/CD
 - If you use Azure Devops: a Service Connection associated with the previous SPN
-- If you use Gihub: put client ID et Client secret of the previous SPN in Environment variables
+- If you use Github: put client ID et Client secret of the previous SPN in Environment variables
 
 Log Analytics Workspace can either be created by terraform or be specified as a data source (if you want this resource to be used by other projects).
 If you want Terraform to create a Log Analytics Workspace, assign variable ***create_log_analytics_workspace*** to true. Default is false
