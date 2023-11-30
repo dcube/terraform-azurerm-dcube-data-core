@@ -20,5 +20,5 @@ output "resource_group_name" {
 
 output "log_analytics_name" {
   value       = var.create_log_analytics_workspace ? azurerm_log_analytics_workspace.log[0].name : data.azurerm_log_analytics_workspace.log[0].name
-  description = "Name of the resource group where resources are created"
+  description = "Name of the Log analytics workspace"
 }

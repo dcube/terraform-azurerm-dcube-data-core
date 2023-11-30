@@ -1,7 +1,6 @@
 module "test2" {
   source = "../.."
 
-  resource_group_name            = "rg-pocdata-domain-dev-01"
   create_log_analytics_workspace = true
   log_analytics_retention        = 30
 

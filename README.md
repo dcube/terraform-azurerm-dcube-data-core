@@ -87,7 +87,7 @@ Here is an example to create a new Log Analytics Workspace:
 ```HCL
 module "dcube-data-core" {
   source  = "dcube/dcube-data-core/azurerm"
-  version = "1.0.0"
+  version = "1.0.0" # Use "~>1.0" if you want the latest stable version
   
   create_log_analytics_workspace = true
   log_analytics_retention        = 30
